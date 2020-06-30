@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <style>
+            .banner {
+
+            }
+            .banner img {
+                display: none;
+                margin: 0 auto;
+            }
+            .banner img.current {
+                display: block;
+            }
+        </style>
+
+        <div class="banner" id="Banner">
+            <img src="https://picsum.photos/900/450?random=1">
+            <img src="https://picsum.photos/900/450?random=2">
+            <img src="https://picsum.photos/900/450?random=3">
+            <img src="https://picsum.photos/900/450?random=4">
+            <img src="https://picsum.photos/900/450?random=5">
+            <img src="https://picsum.photos/900/450?random=6">
+        </div>
+
+        <script type="text/javascript">
+            var banner = document.getElementById('Banner');
+            
+            var currentSlide = 0;
+
+            var slides = banner.children;
+
+            function nextSlide() {
+                if(currentSlide == slides.length - 1)
+                    currentSlide = 0;
+                else 
+                    currentSlide++;
+
+                changeSlide();
+            }
+
+            function changeSlide() {
+                
+                if(currentSlide >= 0 && currentSlide <= slides.length)
+                {
+                    if(currentSlide == 0)
+                        slides[slides.length - 1].className = '';    
+                    else
+                        slides[currentSlide - 1].className = '';
+
+                    slides[currentSlide].className = 'current';
+                }       
+            }
+
+            function init() {
+                changeSlide();
+
+                setInterval(nextSlide, 2000);
+            }
+
+            init();
+
+        </script>
+    </body>
+</html>
