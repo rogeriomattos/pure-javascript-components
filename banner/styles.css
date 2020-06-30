@@ -1,0 +1,10 @@
+.banner {
+
+}
+.banner img {
+    display: none;
+    margin: 0 auto;
+}
+.banner img.current {
+    display: block;
+}
