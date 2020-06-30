@@ -1,10 +1,31 @@
 .banner {
 
 }
-.banner img {
+.banner img.slide {
     display: none;
     margin: 0 auto;
 }
-.banner img.current {
-    display: block;
+
+.arrows {
+    width: 300px;
+    margin: 0 auto;
 }
+
+.arrows > div {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    font-weight: 700;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.arrows > div:hover {
+    background-color: #eee;
+}
+.arrows > div:active {
+    background-color: #ccc;
+}
+
