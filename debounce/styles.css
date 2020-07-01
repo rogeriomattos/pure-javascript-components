@@ -1,0 +1,29 @@
+#btn {
+    width: 250px;
+    margin: 20px auto;
+    display: block;
+    background: rgb(10, 103, 209);
+    color: #fff;
+    border: 1px solid rgb(7, 78, 160);
+    padding: 10px 0;
+}
+
+#btn:active {
+    background: rgb(7, 78, 160);
+}
+
+.normal-click, .debounce-click {
+    width: 250px;
+    padding: 15px 10px;
+    margin: 10px auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.normal-click {
+    background: rgb(248, 244, 7);
+}
+
+.debounce-click {
+    background: rgb(30, 252, 86);
+}

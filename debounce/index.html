@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link  rel="stylesheet" href="styles.css">
+        <script src="./createDebounce.js"></script>
+    </head>
+    <body>
+        <div>
+            <input type="button" id="btn" value="CLICK"/>
+        </div>
+        <div id="listClickEvent">
+
+        </div>
+        <script type="text/javascript">
+            var debounce = createDebounce();
+
+            console.log(debounce);
+
+            var btn = document.getElementById('btn');
+
+            var listClickEvent = document.getElementById('listClickEvent');
+
+            btn.addEventListener('click', function(){
+                
+                var elementClick = document.createElement('div');
+                
+                elementClick.textContent = 'Normal Click';
+                elementClick.className = 'normal-click';
+                
+                listClickEvent.appendChild(elementClick);
+
+                debounce(function() {
+                    var elementClickDebounce = document.createElement('div');
+                    
+                    elementClickDebounce.textContent = 'Debounce Click';
+                    elementClickDebounce.className = 'debounce-click';
+                    
+                    listClickEvent.appendChild(elementClickDebounce);
+
+                    console.log('click debounce');
+                });
+            });
+        </script>
+    </body>
+</html>
