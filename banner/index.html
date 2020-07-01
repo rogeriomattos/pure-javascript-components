@@ -2,10 +2,12 @@
 <html>
     <head>
         <link  rel="stylesheet" href="styles.css">
-        
+        <script src="createBanner.js"></script>
     </head>
     <body>
         <div class="banner" id="banner">
+            <div id="previous"><</div>
+            <div id="next">></div>
             <img class="slide" src="https://picsum.photos/900/450?random=1">
             <img class="slide" src="https://picsum.photos/900/450?random=2">
             <img class="slide" src="https://picsum.photos/900/450?random=3">
@@ -13,10 +15,26 @@
             <img class="slide" src="https://picsum.photos/900/450?random=5">
             <img class="slide" src="https://picsum.photos/900/450?random=6">
         </div>
-        <div class="arrows">
-            <div id="previous"><</div><div id="next">></div>
+        <div class="pagesWrapper">
+            <span id="pages"></span>
         </div>
 
-        <script src="scripts.js"></script>
+        <script type="text/javascript">
+            var banner = createBanner('slide', 5000);
+
+            banner.subscribe(function(state){
+                document.getElementById('pages').innerHTML = (state.currentSlide + 1) + '/' + state.slidesLength;
+            });
+
+            document.getElementById('banner').addEventListener('mouseenter', banner.stop);
+            document.getElementById('banner').addEventListener('mouseleave', banner.start);
+
+            document.getElementById('next').addEventListener('click', function(){
+                banner.stop();
+                banner.nextSlide();
+                banner.start();
+            });
+            document.getElementById('previous').addEventListener('click', banner.previousSlide);
+        </script>
     </body>
 </html>

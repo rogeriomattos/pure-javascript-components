@@ -4,6 +4,7 @@ function createBanner(slideClass, time, autoPlay){
         return;
     }
     
+    var observers = [];
     var currentSlide;
     var slides;
     var interval;
@@ -15,34 +16,50 @@ function createBanner(slideClass, time, autoPlay){
             autoPlay = true;
         
         currentSlide = 0;
-
         slides = document.getElementsByClassName(slideClass);
-
+        
         interval = null;
-    
-        if(slides.length > 0)
+        
+        if(slides.length > 0){
             slides[0].style.display = 'block';
-    
+            console.log('init');
+            
+        }
+
         if(autoPlay)
             start();
     }
 
+    function subscribe(observerFunction) {
+        observers.push(observerFunction);
+        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
+    }
+
+    function notifyAll(state) {
+        for (var i = 0; i < observers.length; i++) {
+            observers[i](state);
+        }
+    }
+
     function nextSlide() {
+        
         if(currentSlide == slides.length - 1)
             currentSlide = 0;
         else 
             currentSlide++;
-    
+        
+        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
         changeSlide();
     }
     
     function previousSlide() {
-    
+        
         if(currentSlide == 0)
             currentSlide = slides.length - 1;
         else
             currentSlide--;
-    
+        
+        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
         changeSlide();
     }
     
@@ -56,12 +73,13 @@ function createBanner(slideClass, time, autoPlay){
         }       
     }
 
-    function start(){
+    function start() {
+        stop();
         if(time && autoPlay)
             interval = setInterval(nextSlide, time);
     }
     
-    function pause(){
+    function stop() {
         if(autoPlay)
             clearInterval(interval);
     }
@@ -69,21 +87,9 @@ function createBanner(slideClass, time, autoPlay){
     return {
         nextSlide: nextSlide,
         previousSlide: previousSlide,
-        pause: pause,
+        stop: stop,
         start: start,
-        currentSlide: function(){ return currentSlide;}
+        subscribe: subscribe
     };
 }
 
-var banner = createBanner('slide', 1000);
-
-document.getElementById('banner').addEventListener('mouseenter', banner.pause);
-document.getElementById('banner').addEventListener('mouseleave', banner.start);
-
-document.getElementById('next').addEventListener('mouseenter', banner.pause);
-document.getElementById('next').addEventListener('mouseleave', banner.start);
-document.getElementById('next').addEventListener('click', banner.nextSlide);
-
-document.getElementById('previous').addEventListener('mouseenter', banner.pause);
-document.getElementById('previous').addEventListener('mouseleave', banner.start);
-document.getElementById('previous').addEventListener('click', banner.previousSlide);
