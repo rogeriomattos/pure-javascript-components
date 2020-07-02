@@ -29,11 +29,7 @@
             document.getElementById('banner').addEventListener('mouseenter', banner.stop);
             document.getElementById('banner').addEventListener('mouseleave', banner.start);
 
-            document.getElementById('next').addEventListener('click', function(){
-                banner.stop();
-                banner.nextSlide();
-                banner.start();
-            });
+            document.getElementById('next').addEventListener('click', banner.nextSlide);
             document.getElementById('previous').addEventListener('click', banner.previousSlide);
         </script>
     </body>
