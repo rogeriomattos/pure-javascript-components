@@ -21,9 +21,23 @@
 
         <script type="text/javascript">
             var banner = createBanner('slide', 5000);
+            
+            banner.subscribe(function(state){
+                document.getElementById('pages').innerHTML = (state.currentSlide + 1) + '/' + state.slides.length;
+            });
 
             banner.subscribe(function(state){
-                document.getElementById('pages').innerHTML = (state.currentSlide + 1) + '/' + state.slidesLength;
+                var slides = state.slides;
+                var currentSlide = state.currentSlide;
+
+                for(var i = 0; i < slides.length; i++)
+                {
+                    if(i == currentSlide)
+                        slides[i].style.display = 'block';
+                    else
+                        slides[i].style.display = 'none';      
+                }
+
             });
 
             document.getElementById('banner').addEventListener('mouseenter', banner.stop);
@@ -31,6 +45,8 @@
 
             document.getElementById('next').addEventListener('click', banner.nextSlide);
             document.getElementById('previous').addEventListener('click', banner.previousSlide);
+
+            banner.start();
         </script>
     </body>
 </html>

@@ -5,34 +5,17 @@ function createBanner(slideClass, time, autoPlay){
     }
     
     var observers = [];
-    var currentSlide;
-    var slides;
-    var interval;
-    
-    init();
 
-    function init(){
-        if(autoPlay == undefined)
-            autoPlay = true;
-        
-        currentSlide = 0;
-        slides = document.getElementsByClassName(slideClass);
-        
-        interval = null;
-        
-        if(slides.length > 0){
-            slides[0].style.display = 'block';
-            console.log('init');
-            
-        }
+    if(autoPlay == undefined)
+        autoPlay = true;
 
-        if(autoPlay)
-            start();
-    }
+    var currentSlide = 0;
+    var slides = document.getElementsByClassName(slideClass);
+    var interval = null;
 
     function subscribe(observerFunction) {
         observers.push(observerFunction);
-        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
+        notifyAll({currentSlide: currentSlide, slides: slides});
     }
 
     function notifyAll(state) {
@@ -48,8 +31,8 @@ function createBanner(slideClass, time, autoPlay){
         else 
             currentSlide++;
         
-        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
-        changeSlide();
+        notifyAll({currentSlide: currentSlide, slides: slides});
+        
     }
     
     function previousSlide() {
@@ -59,20 +42,10 @@ function createBanner(slideClass, time, autoPlay){
         else
             currentSlide--;
         
-        notifyAll({currentSlide: currentSlide, slidesLength: slides.length});
-        changeSlide();
+        notifyAll({currentSlide: currentSlide, slides: slides});
+        
     }
     
-    function changeSlide() {
-        for(var i = 0; i < slides.length; i++)
-        {
-            if(i == currentSlide)
-                slides[i].style.display = 'block';
-            else
-                slides[i].style.display = 'none';
-        }       
-    }
-
     function start() {
         stop();
         if(time && autoPlay)
