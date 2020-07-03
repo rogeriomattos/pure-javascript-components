@@ -2,12 +2,12 @@ body {
     margin: 0;
     padding: 0;
 }
-.banner {
+.carousel {
     position: relative;
     width: 900px;
     margin: 0 auto;
 }
-.banner img.slide {
+.carousel img.slide {
     display: none;
     margin: 0 auto;
 }

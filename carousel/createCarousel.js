@@ -1,4 +1,4 @@
-function createBanner(slideClass, time, autoPlay){
+function createCarousel(slideClass, time, autoPlay){
     if(slideClass == undefined){
         console.error('SlideClass is undefined');
         return;

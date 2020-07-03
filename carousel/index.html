@@ -2,10 +2,10 @@
 <html>
     <head>
         <link  rel="stylesheet" href="styles.css">
-        <script src="createBanner.js"></script>
+        <script src="createCarousel.js"></script>
     </head>
     <body>
-        <div class="banner" id="banner">
+        <div class="carousel" id="carousel">
             <div id="previous"><</div>
             <div id="next">></div>
             <img class="slide" src="https://picsum.photos/900/450?random=1">
@@ -20,13 +20,13 @@
         </div>
 
         <script type="text/javascript">
-            var banner = createBanner('slide', 5000);
-            
-            banner.subscribe(function(state){
+            var carousel = createCarousel('slide', 5000);
+
+            carousel.subscribe(function(state){
                 document.getElementById('pages').innerHTML = (state.currentSlide + 1) + '/' + state.slides.length;
             });
 
-            banner.subscribe(function(state){
+            carousel.subscribe(function(state){
                 var slides = state.slides;
                 var currentSlide = state.currentSlide;
 
@@ -40,13 +40,13 @@
 
             });
 
-            document.getElementById('banner').addEventListener('mouseenter', banner.stop);
-            document.getElementById('banner').addEventListener('mouseleave', banner.start);
+            document.getElementById('carousel').addEventListener('mouseenter', carousel.stop);
+            document.getElementById('carousel').addEventListener('mouseleave', carousel.start);
 
-            document.getElementById('next').addEventListener('click', banner.nextSlide);
-            document.getElementById('previous').addEventListener('click', banner.previousSlide);
+            document.getElementById('next').addEventListener('click', carousel.nextSlide);
+            document.getElementById('previous').addEventListener('click', carousel.previousSlide);
 
-            banner.start();
+            carousel.start();
         </script>
     </body>
 </html>
