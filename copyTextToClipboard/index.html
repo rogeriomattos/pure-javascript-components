@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./copyTextToClipboard.js"></script>
+        <link  rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div>
+            <input type="text" value="Hello World" id="inputText">
+
+            <button id="copyText">Copy text</button>
+        </div>
+        <div id="copiedResult">
+
+        </div>
+        
+
+        <script type="text/javascript">
+            document.getElementById('copyText').addEventListener('click', function(){
+                copyTextToClipboard('inputText');
+
+                document.getElementById('copiedResult').textContent = 'Copied text';
+            });
+        </script>
+    </body>
+</html>
